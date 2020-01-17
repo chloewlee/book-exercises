@@ -1,21 +1,24 @@
 # Exercise 1: calling built-in functions
 
 # Create a variable `my_name` that contains your name
-
+my_name <- "Chloe Lee"
 
 # Create a variable `name_length` that holds how many letters (including spaces)
 # are in your name (use the `nchar()` function)
 
+name_length <- nchar("Chloe Lee")
+print(name_length)
 
 # Print the number of letters in your name
+print(name_length)
 
 
 # Create a variable `now_doing` that is your name followed by "is programming!" 
 # (use the `paste()` function)
-
+now_doing <- paste("Chloe", "is", "programming!")
 
 # Make the `now_doing` variable upper case
-
+ now_doing <- toupper(now_doing)
 
 ### Bonus
 
