@@ -1,11 +1,17 @@
 # Exercise 2: a basic Shiny app
 
 # Load the `shiny` package
-
+library(shiny)
 
 # Define a new `ui` variable. This variable should be assigned a `fluidPage()` layout
 # The `fluidPage()` layout should be passed the following:
-
+my_ui <- fluidPage(
+  titlePanel("Cost Calculator"),
+  numericInput(inputID = "price", label = "Price (in dollars)", value = 0, min = 0),
+  numericInput(inputID = "quantity", label = "Quantity", value = 1, min = 1),
+  p(strong("Cost")),
+  textOutput(outputId = "cost")
+)
   
   # A `titlePanel()` layout with the text "Cost Calculator"
 
@@ -34,7 +40,11 @@
   # The reactive expression should return the input `price` times the `quantity`
   # So it looks nice, paste a "$" in front of it!
 
+output_list$cost <- renderText({
+  total <- input_list$price * input_list$quantity
+  return(paste0("$"))
+})
 
 
 # Create a new `shinyApp()` using the above ui and server
-
+shinyApp(ui = my_ui, server = server)

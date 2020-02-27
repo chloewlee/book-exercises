@@ -10,7 +10,16 @@ library("shiny")
   
   # A `titlePanel()` with the text "Income Inequality"
   
-
+intro_panel <- tabPanel(
+  title = "Introduction",
+  titlePanel("income Inequality"),
+  p("The below diagram was created by the New York Times to illustrate the increasing level of inequality in
+  the US."),
+  img(src = "inequality.png", alt = "Example NYT chart"),
+  p(
+    a(href = "https://www.nytimes.com/interactive/2017/08/07/opinion/leonhardt-income-inequality.html", "(source)")
+  )
+)
   # A paragraph `p()` describing with the text: "The below diagram was created
   # by the New York Times to illustrate the increasing level of inequality in
   # the US."
@@ -37,12 +46,18 @@ library("shiny")
   # A `sliderInput()` for the 'percentile' value, labeled "Income Percentile".
   # This slider should let the user pick a range between 0 and 100
 
+sidebar_content <- sidebarPanel(
+  sliderInput(inputId = "percentile", label = "Income Percentile", min = 0, max = 100, value = c(0,100))
+)
 
 # Define a variable `main_content` as a `mainPanel()` UI element
 # containing the following information:
 
   # A `plotOutput()` element showing the 'plot' output (defined in the server)
-
+main_content <- mainPanel(
+  plotOutput(outputId = "plot"),
+  p("data from", a(href = "http://gabriel-zucman.eu/usdina/"))
+)
 
   # A paragraph with a hyperlink to the data source
   # http://gabriel-zucman.eu/usdina/
@@ -52,7 +67,11 @@ library("shiny")
 # This layout will contain the following elements:
 
   # A `titlePanel()` with the text "Income growth 1980-2014"
-  
+growth_panel <- tabPanel(
+  title = "growth chart",
+  titlePanel("Income growth 1980-2014"),
+  sidebarLayout(sidebar_content, main_content)
+)
 
   # A `sidebarLayout()` to create two columns.
   # The sidebar layout will contain elements:
@@ -69,3 +88,7 @@ library("shiny")
 # - Your `intro_panel`
 # - Your `growth_panel`
 
+ui <- navbarPage(
+  title = "Income Inequality",
+  intro_panel, growth_panel
+)
